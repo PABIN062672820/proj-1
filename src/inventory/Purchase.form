@@ -179,15 +179,17 @@
                               <Component id="jLabel5" alignment="3" max="32767" attributes="0"/>
                               <Component id="jLabel6" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txtpcode" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                              <Component id="txtpname" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                              <Group type="102" alignment="3" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
                                   <Component id="txtprice" min="-2" pref="29" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="txtqty" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                              <Component id="jButton1" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="txtpcode" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                                  <Component id="txtpname" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                                  <Component id="txtqty" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                                  <Component id="jButton1" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jScrollPane1" pref="292" max="32767" attributes="0"/>
