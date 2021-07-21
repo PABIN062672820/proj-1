@@ -240,6 +240,7 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
         try {
             // TODO add your handling code here:
             con = java.sql.DriverManager.getConnection("jdbc:mysql://localhost/inventory","root","");
@@ -270,13 +271,14 @@ public class Login extends javax.swing.JFrame {
                     
                 }}
             
-                else
+            else 
                 {
                         JOptionPane.showMessageDialog(this,"Username & password not matched");
                 
                 
                         }
-            
+           
+       
             
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
@@ -285,7 +287,7 @@ public class Login extends javax.swing.JFrame {
         
     
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
          txtuser.setText("");

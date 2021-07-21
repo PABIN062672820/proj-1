@@ -14,6 +14,8 @@ import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -116,6 +118,9 @@ public class Customer extends javax.swing.JFrame {
         txtphone = new javax.swing.JTextField();
         txtemail = new javax.swing.JTextField();
         txtaddress = new javax.swing.JTextField();
+        jlb1 = new javax.swing.JLabel();
+        lblImage = new javax.swing.JButton();
+        jlb = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -187,6 +192,34 @@ public class Customer extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("Address");
 
+        txtphone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtphoneKeyReleased(evt);
+            }
+        });
+
+        txtemail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtemailKeyReleased(evt);
+            }
+        });
+
+        jlb1.setForeground(new java.awt.Color(255, 51, 51));
+
+        lblImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image1/bms/search.png"))); // NOI18N
+        lblImage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lblImageActionPerformed(evt);
+            }
+        });
+        lblImage.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                lblImageKeyPressed(evt);
+            }
+        });
+
+        jlb.setForeground(new java.awt.Color(255, 51, 51));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -199,33 +232,49 @@ public class Customer extends javax.swing.JFrame {
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(txtphone, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
+                    .addComponent(txtaddress, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtemail, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtname))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtphone, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtemail, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtaddress, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(31, Short.MAX_VALUE))
+                    .addComponent(jlb1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 26, Short.MAX_VALUE)
+                                .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jlb, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 38, Short.MAX_VALUE)
+                .addContainerGap(31, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 38, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtphone, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtphone, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlb, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 31, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-                    .addComponent(txtemail, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtemail, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlb1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 32, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
                     .addComponent(txtaddress, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(176, Short.MAX_VALUE))
+                .addContainerGap(175, Short.MAX_VALUE))
         );
 
         jButton4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -260,7 +309,7 @@ public class Customer extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 552, Short.MAX_VALUE)))))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -269,7 +318,7 @@ public class Customer extends javax.swing.JFrame {
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -357,6 +406,30 @@ public class Customer extends javax.swing.JFrame {
             String phone= txtphone.getText();
             String email= txtemail.getText();
             String address= txtaddress.getText();
+            
+            
+                 if (vname.equals("")&& phone.equals("")&&email.equals("")&&address.equals("") ){
+     JOptionPane.showMessageDialog(null, " All the field  must be entered ");
+                 }
+             
+           else if (vname.equals("")){
+     JOptionPane.showMessageDialog(null, "   name must be entered ");
+             
+}
+          else    if(phone.equals("")){
+     JOptionPane.showMessageDialog(null, " phone must be entered ");}
+     
+    else      if(email.equals("")){
+     JOptionPane.showMessageDialog(null, " email must be entered ");}
+     
+        else if(address.equals("")){
+     JOptionPane.showMessageDialog(null, " address must be entered ");
+     
+     
+         
+}
+        else {
+
 
             pat = con.prepareStatement("insert into customer(name,phone,email,address)values(?,?,?,?)");
             pat.setString(1,vname);
@@ -373,6 +446,7 @@ public class Customer extends javax.swing.JFrame {
             txtname.requestFocus();
             loade();
 
+        }
         }
         catch (SQLException ex) {
          Logger.getLogger(Customer.class.getName()).log(Level.SEVERE, null, ex);
@@ -407,10 +481,95 @@ public class Customer extends javax.swing.JFrame {
         txtemail.setText("");
         txtaddress.setText("");
         txtname.requestFocus();
+        jlb1.setText("");
         loade();
         jButton1.setEnabled(true);
 
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void txtemailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtemailKeyReleased
+        // TODO add your handling code here:
+        
+         String  PATTERN="^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+        Pattern pa = Pattern.compile(PATTERN);
+        Matcher ma = pa.matcher(txtemail.getText());
+        if(!ma.matches()){
+            jlb1.setText(" Incorrect Format");
+            
+        }
+        else{
+            jlb1.setText("");
+            
+        }
+    }//GEN-LAST:event_txtemailKeyReleased
+
+    private void lblImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblImageActionPerformed
+        try {
+            // TODO add your handling code here:
+            String pname=txtname.getText();
+            pat = con.prepareStatement("select * from customer where name =?");
+            pat.setString(1,pname);
+            ResultSet rs = pat.executeQuery();
+
+            if(rs.next()== false)
+            {
+                JOptionPane.showMessageDialog(this, "Customer Not  Found!!!!!!!!!!");
+            }
+            else
+            {
+                String des = rs.getString("phone");
+                String bar = rs.getString("email");
+                String cprice = rs.getString("address");
+
+                txtphone.setText(des.trim());
+                txtemail.setText(bar.trim());
+                txtaddress.setText(cprice.trim());
+
+                //  txtpn.setEditable(false);
+
+                jButton1.setEnabled(false);
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Items.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_lblImageActionPerformed
+
+    private void lblImageKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lblImageKeyPressed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_lblImageKeyPressed
+
+    private void txtphoneKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtphoneKeyReleased
+        // TODO add your handling code here:
+        String PATTERN="^([0-9]+$)?";
+         Pattern pa = Pattern.compile(PATTERN);
+        Matcher ma = pa.matcher(txtphone.getText());
+        if(!ma.matches()){
+            jlb.setText(" format incorrect");
+            
+        }
+        else{
+           Pattern pattern = Pattern.compile("\\d{10}");
+           Matcher mat = pa.matcher(txtphone.getText());
+
+    if (!mat.matches()) {
+         jlb.setText("must be a 10 digit");
+            
+        
+    } else {
+         jlb.setText("");
+             
+    }
+        
+        
+        
+            
+        }
+        
+        
+    }//GEN-LAST:event_txtphoneKeyReleased
 
     /**
      * @param args the command line arguments
@@ -461,6 +620,9 @@ public class Customer extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JLabel jlb;
+    private javax.swing.JLabel jlb1;
+    private javax.swing.JButton lblImage;
     private javax.swing.JTextField txtaddress;
     private javax.swing.JTextField txtemail;
     private javax.swing.JTextField txtname;

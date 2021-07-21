@@ -15,8 +15,11 @@ import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 public class Vendor extends javax.swing.JFrame {
 
   
@@ -95,6 +98,9 @@ public class Vendor extends javax.swing.JFrame {
         txtphone = new javax.swing.JTextField();
         txtemail = new javax.swing.JTextField();
         txtaddress = new javax.swing.JTextField();
+        jlb = new javax.swing.JLabel();
+        jlb1 = new javax.swing.JLabel();
+        lblImage = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -120,6 +126,37 @@ public class Vendor extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("Address");
 
+        txtphone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtphoneKeyReleased(evt);
+            }
+        });
+
+        txtemail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtemailKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtemailKeyReleased(evt);
+            }
+        });
+
+        jlb.setForeground(new java.awt.Color(255, 51, 51));
+
+        jlb1.setForeground(new java.awt.Color(255, 51, 51));
+
+        lblImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image1/bms/search.png"))); // NOI18N
+        lblImage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lblImageActionPerformed(evt);
+            }
+        });
+        lblImage.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                lblImageKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -132,11 +169,18 @@ public class Vendor extends javax.swing.JFrame {
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(txtemail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
+                    .addComponent(txtphone, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtname, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtaddress))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtname)
-                    .addComponent(txtphone, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
-                    .addComponent(txtemail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
-                    .addComponent(txtaddress, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE))
+                    .addComponent(jlb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jlb1, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -147,15 +191,28 @@ public class Vendor extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(8, 8, 8)
-                        .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtphone, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 20, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
-                    .addComponent(txtemail, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtphone, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addComponent(jlb, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+                            .addComponent(txtemail, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jlb1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 20, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
@@ -281,33 +338,57 @@ public class Vendor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
+
+
+
+        
             String vname= txtname.getText();
             String phone= txtphone.getText();
             String email= txtemail.getText();
             String address= txtaddress.getText();
-                                             
-            pat = con.prepareStatement("insert into vendor(name,phone,email,address)values(?,?,?,?)");
-            pat.setString(1,vname);
-            pat.setString(2,phone);
-            pat.setString(3,email);
-            pat.setString(4,address);
-            pat.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Data Added");
-        
-            txtname.setText("");
-            txtphone.setText("");
-            txtemail.setText("");
-            txtaddress.setText("");
-            txtname.requestFocus();
-            load();
           
             
-        } 
-        catch (SQLException ex) {
-            Logger.getLogger(Vendor.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            if(vname.equals("")){
+     JOptionPane.showMessageDialog(null, "   name must be entered ");
+             
+}
+              if(phone.equals("")){
+     JOptionPane.showMessageDialog(null, " phone must be entered ");}
+     
+          if(email.equals("")){
+     JOptionPane.showMessageDialog(null, " email must be entered ");}
+     
+         if(address.equals("")){
+     JOptionPane.showMessageDialog(null, " address must be entered ");
+     
+     
+         
+}
+else{
+
+                                             
+                try {
+                    pat = con.prepareStatement("insert into vendor(name,phone,email,address)values(?,?,?,?)");
+                    pat.setString(1,vname);
+                    pat.setString(2,phone);
+                    pat.setString(3,email);
+                    pat.setString(4,address);
+                    pat.executeUpdate();
+                    JOptionPane.showMessageDialog(this, "Data Added");
+                    
+                    txtname.setText("");
+                    txtphone.setText("");
+                    txtemail.setText("");
+                    txtaddress.setText("");
+                    txtname.requestFocus();
+                    load();
+                } catch (SQLException ex) {
+                    Logger.getLogger(Vendor.class.getName()).log(Level.SEVERE, null, ex);
+                }
+          
+}
       
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -400,6 +481,8 @@ public class Vendor extends javax.swing.JFrame {
             txtemail.setText("");
             txtaddress.setText("");
             txtname.requestFocus();
+             jlb1.setText("");
+              jlb.setText("");
             load();
             jButton1.setEnabled(true);
         
@@ -413,6 +496,98 @@ public class Vendor extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void txtemailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtemailKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtemailKeyPressed
+
+    private void txtemailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtemailKeyReleased
+
+        // TODO add your handling code here:
+        String  PATTERN="^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+        Pattern pa = Pattern.compile(PATTERN);
+        Matcher ma = pa.matcher(txtemail.getText());
+        if(!ma.matches()){
+            jlb1.setText("Email format incorrect");
+            
+        }
+        else{
+            jlb1.setText("");
+            
+        }
+        
+        
+     
+    }//GEN-LAST:event_txtemailKeyReleased
+
+    private void txtphoneKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtphoneKeyReleased
+        // TODO add your handling code here:
+       String PATTERN="^([0-9]+$)?";
+         Pattern pa = Pattern.compile(PATTERN);
+        Matcher ma = pa.matcher(txtphone.getText());
+        if(!ma.matches()){
+            jlb.setText(" format incorrect");
+            
+        }
+        else{
+           Pattern pattern = Pattern.compile("\\d{10}");
+           Matcher mat = pa.matcher(txtphone.getText());
+
+    if (!mat.matches()) {
+         jlb.setText("must be a 10 digit");
+            
+        
+    } else {
+         jlb.setText("");
+             
+    }
+        
+        
+        
+            
+        }
+        
+    }//GEN-LAST:event_txtphoneKeyReleased
+
+    private void lblImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblImageActionPerformed
+        try {
+            // TODO add your handling code here:
+            String pname=txtname.getText();
+            pat = con.prepareStatement("select * from vendor where name =?");
+            pat.setString(1,pname);
+            ResultSet rs = pat.executeQuery();
+
+            if(rs.next()== false)
+            {
+                JOptionPane.showMessageDialog(this, "Vendor Not  Found!!!!!!!!!!");
+            }
+            else
+            {
+                String des = rs.getString("phone");
+                String bar = rs.getString("email");
+                String cprice = rs.getString("address");
+               
+
+                txtphone.setText(des.trim());
+                txtemail.setText(bar.trim());
+                txtaddress.setText(cprice.trim());
+              
+                //  txtpn.setEditable(false);
+
+                jButton1.setEnabled(false);
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Items.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_lblImageActionPerformed
+
+    private void lblImageKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lblImageKeyPressed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_lblImageKeyPressed
 
     /**
      * @param args the command line arguments
@@ -462,6 +637,9 @@ public class Vendor extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel jlb;
+    private javax.swing.JLabel jlb1;
+    private javax.swing.JButton lblImage;
     private javax.swing.JTextField txtaddress;
     private javax.swing.JTextField txtemail;
     private javax.swing.JTextField txtname;

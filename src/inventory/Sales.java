@@ -504,11 +504,18 @@ public class Sales extends javax.swing.JFrame {
          
          
          txtbill.setText(
-         txtbill.getText()+txtcn.getText()+"\t\t"+txtqty.getText()+"\t\t"+txtprice.getText()+"\n"
+         txtbill.getText()+txtcn.getText()+"\n"
+                 +txtpname.getText()+"\t"+txtqty.getText()+"\t"+txtprice.getText()+"\n"
          );
+          txtpname.getText();
+          
+          txtqty.getText();
+          txtprice.getText();
          
-         
-         
+          txtpcode.setText("");
+           txtpname.setText("");
+           txtprice.setText("");
+            txtqty.setText("");
          
          
 
@@ -551,10 +558,14 @@ public class Sales extends javax.swing.JFrame {
 
     private void txtcnKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcnKeyPressed
         // TODO add your handling code here:
+        
           if(evt.getKeyCode() == KeyEvent.VK_ENTER)
         {
             cname();
         }
+          else{
+              
+          }
 
        
     }//GEN-LAST:event_txtcnKeyPressed
@@ -702,10 +713,7 @@ public class Sales extends javax.swing.JFrame {
                 
             }
             txttc.setText(String.valueOf(sum));
-            txtpcode.setText("");
-            txtpname.setText("");
-            txtprice.setText("");
-            txtqty.setText("");
+           
         } catch (SQLException ex) {
             Logger.getLogger(Sales.class.getName()).log(Level.SEVERE, null, ex);
         }
