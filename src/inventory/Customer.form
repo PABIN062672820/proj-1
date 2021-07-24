@@ -222,13 +222,13 @@
                   </Group>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel2" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                      <Component id="txtphone" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="txtphone" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                       <Component id="jlb" alignment="1" min="-2" pref="28" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" pref="31" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel3" alignment="3" max="32767" attributes="0"/>
-                      <Component id="txtemail" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="txtemail" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                       <Component id="jlb1" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" pref="32" max="32767" attributes="0"/>
@@ -236,7 +236,7 @@
                       <Component id="jLabel4" alignment="3" pref="27" max="32767" attributes="0"/>
                       <Component id="txtaddress" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="175" max="32767" attributes="0"/>
+                  <EmptySpace pref="174" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

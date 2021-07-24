@@ -263,18 +263,18 @@ public class Customer extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtphone, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtphone, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlb, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 31, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtemail, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtemail, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlb1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 32, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
                     .addComponent(txtaddress, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(175, Short.MAX_VALUE))
+                .addContainerGap(174, Short.MAX_VALUE))
         );
 
         jButton4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -436,8 +436,33 @@ public class Customer extends javax.swing.JFrame {
             pat.setString(2,phone);
             pat.setString(3,email);
             pat.setString(4,address);
-            pat.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Data Added");
+            Pattern pattern = Pattern.compile("\\d{10}");
+                       Matcher mat = pattern.matcher(phone);
+
+                      if (!mat.matches()) {
+                     JOptionPane.showMessageDialog(this, "Phone Incorrect format ");
+                    
+                     
+    } 
+                      else  {
+                    String  PATTERN="^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+                    Pattern pa = Pattern.compile(PATTERN);
+                    Matcher ma = pa.matcher(email);
+                   if(!ma.matches()){
+                  JOptionPane.showMessageDialog(this, " E-mail format Incorrect ");            
+        }
+                   else  {
+                    pat.executeUpdate();
+                                                
+                
+                    JOptionPane.showMessageDialog(this, "Data Added Succesfully");
+                      }
+                      }
+            
+            
+            
+            
+           
 
             txtname.setText("");
             txtphone.setText("");
@@ -552,7 +577,7 @@ public class Customer extends javax.swing.JFrame {
         }
         else{
            Pattern pattern = Pattern.compile("\\d{10}");
-           Matcher mat = pa.matcher(txtphone.getText());
+           Matcher mat = pattern.matcher(txtphone.getText());
 
     if (!mat.matches()) {
          jlb.setText("must be a 10 digit");

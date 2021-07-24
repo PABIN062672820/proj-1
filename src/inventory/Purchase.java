@@ -42,6 +42,8 @@ public class Purchase extends javax.swing.JFrame {
     DefaultTableModel df;
     ResultSet rs;
     
+   
+    
     public void Connect()
     {
        
@@ -77,7 +79,7 @@ public class Purchase extends javax.swing.JFrame {
         }
     }
     
-
+ 
     
     
     public void barcode()
@@ -135,6 +137,7 @@ public class Purchase extends javax.swing.JFrame {
              
         }
         txttc.setText(String.valueOf(sum));
+        
         txtpcode.setText("");
          txtpname.setText("");
           txtprice.setText("");
@@ -155,10 +158,13 @@ public class Purchase extends javax.swing.JFrame {
             String pay = txtpay.getText();
             String bal = txtbal.getText();
             
+            
+            
             int lastid =0;
             String query1 = "insert into purchase(date,vendor,subtotal,pay,bal)values(?,?,?,?,?)";
             pat = con.prepareStatement(query1,Statement.RETURN_GENERATED_KEYS);
             pat.setString(1, date);
+           
             pat.setString(2, vendor);
             pat.setString(3, subtotal);
             pat.setString(4, pay);
